@@ -42,15 +42,15 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       onSubmit={onSubmit}
     >
       {() => (
-        <Form className="w-full bg-white shadow-md rounded-lg p-8">
-          <h2 className="text-lg font-bold mb-6 text-center text-gray-800">
+        <Form className="w-full bg-background-light dark:bg-background-dark shadow-md rounded-lg p-8">
+          <h2 className="text-lg font-bold mb-6 text-center text-text-light dark:text-text-dark">
             Registre-se
           </h2>
 
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
               Nome
             </label>
@@ -59,7 +59,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="name"
               name="name"
               placeholder="Digite seu nome"
-              className="mt-1 px-1 block w-full border-gray-300 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="name"
@@ -71,7 +71,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
               Email
             </label>
@@ -80,7 +80,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="email"
               name="email"
               placeholder="Digite seu e-mail"
-              className="mt-1 px-1 block w-full border-gray-300 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="email"
@@ -92,7 +92,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
               Senha
             </label>
@@ -101,7 +101,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="password"
               name="password"
               placeholder="Digite sua senha"
-              className="mt-1 px-1 block w-full border-gray-100 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="password"
@@ -118,21 +118,21 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
 
           <button
             type="submit"
-            className={`w-full bg-blue-600 text-white font-bold py-2 rounded-md transition duration-300 ${
+            className={`w-full bg-blue-600 dark:bg-blue-500 text-white font-bold py-2 rounded-md transition duration-300 ${
               isSubmitting
                 ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-blue-700"
+                : "hover:bg-blue-700 dark:hover:bg-blue-600"
             }`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Registrando..." : "Registrar"}
           </button>
-          <p className="mt-4 text-center text-gray-600">
+          <p className="mt-4 text-center text-text-light dark:text-text-dark">
             Já tem cadastro?{" "}
             <button
               type="button"
               onClick={toggleForm}
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
             >
               Faça o login
             </button>
