@@ -1,6 +1,13 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -15,10 +22,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter();
 
-  const login = (token: string) => {
-    setToken(token);
-    localStorage.setItem("token", token);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+      router.push("/dashboard");
+    }
+  }, [router]);
+
+  const login = (newToken: string) => {
+    setToken(newToken);
+    localStorage.setItem("token", newToken);
   };
   const logout = () => {
     setToken(null);

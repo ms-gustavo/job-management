@@ -113,6 +113,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <p className="mt-4 text-center text-gray-600">
             Não tem cadastro?{" "}
             <button
+              type="button"
               onClick={toggleForm}
               className="text-blue-600 hover:underline"
             >
