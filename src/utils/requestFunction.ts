@@ -1,13 +1,19 @@
 export const fetchData = async (
   endpoint: string,
   method: string,
-  data: string
+  data?: string,
+  additionalHeaders?: Record<string, string>
 ) => {
-  const response = await fetch(endpoint, {
+  const options: RequestInit = {
     method: method,
-    headers: { "Content-Type": "application/json" },
-    body: data,
-  });
+    headers: { "Content-type": "application/json", ...additionalHeaders },
+  };
+
+  if (method !== "GET" && data) {
+    options.body = data;
+  }
+
+  const response = await fetch(endpoint, options);
 
   return response;
 };

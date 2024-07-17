@@ -4,12 +4,13 @@ import prisma from "@/lib/prisma";
 
 const registerUser = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const hashedPassword = await brcypt.hash(password, 10);
 
     try {
       const user = await prisma.user.create({
         data: {
+          name,
           email,
           password: hashedPassword,
         },
