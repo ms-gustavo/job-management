@@ -1,21 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginFormValidationSchema } from "@/utils/validationsSchemas";
 import { LoginFormProps } from "@/interfaces/interfaces";
-
+import { loginInitialValues } from "@/utils/initialValues";
+import { fetchData } from "@/utils/requestFunction";
 
 const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
-  const initialValues = { email: "", password: "" };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = (values: typeof initialValues) => {
-    console.log(values);
+  const onSubmit = async (values: typeof loginInitialValues) => {
+    setIsSubmitting(true);
+    setErrorMessage("");
+    const data = JSON.stringify(values);
+    try {
+      const response = await fetchData("api/login", "POST", data);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.token);
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(`Login falhou: ${errorData.error}`);
+        console.error("Login falhou");
+      }
+    } catch (error: any) {
+      setErrorMessage(`Erro ao registrar: ${error.message}`);
+      console.error(`Erro ao registrar: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={loginInitialValues}
       validationSchema={loginFormValidationSchema}
       onSubmit={onSubmit}
     >
@@ -67,11 +87,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
             />
           </div>
 
+          {errorMessage && (
+            <div className="mb-4 bg-red-500 text-slate-100 rounded-sm py-1 text-sm text-center">
+              {errorMessage}
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-bold py-2 rounded-md hover:bg-blue-700 transition duration-300"
+            className={`w-full bg-blue-600 text-white font-bold py-2 rounded-md transition duration-300 ${
+              isSubmitting
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-blue-700"
+            }`}
+            disabled={isSubmitting}
           >
-            Entrar
+            {isSubmitting ? "Logando..." : "Entrar"}
           </button>
           <p className="mt-4 text-center text-gray-600">
             Não tem cadastro?{" "}
