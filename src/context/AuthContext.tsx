@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthContextType } from "@/interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import React, {
   createContext,
@@ -8,13 +9,6 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-
-interface AuthContextType {
-  isAuthenticated: boolean;
-  token: string | null;
-  login: (token: string) => void;
-  logout: () => void;
-}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

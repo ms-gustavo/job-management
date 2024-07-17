@@ -20,11 +20,10 @@ const Dashboard: React.FC = () => {
       const response = await fetchData("/api/user-data", "GET", undefined, {
         Authorization: `Bearer ${token}`,
       });
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         setUserData(data);
       } else {
-        const data = await response.json();
         console.log(data);
       }
     };
