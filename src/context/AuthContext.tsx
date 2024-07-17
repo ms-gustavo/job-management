@@ -18,10 +18,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = (token: string) => {
     setToken(token);
+    localStorage.setItem("token", token);
   };
-
   const logout = () => {
     setToken(null);
+    localStorage.removeItem("token");
   };
 
   return (

@@ -6,10 +6,14 @@ import { loginFormValidationSchema } from "@/utils/validationsSchemas";
 import { LoginFormProps } from "@/interfaces/interfaces";
 import { loginInitialValues } from "@/utils/initialValues";
 import { fetchData } from "@/utils/requestFunction";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { login } = useAuth();
+  const router = useRouter();
 
   const onSubmit = async (values: typeof loginInitialValues) => {
     setIsSubmitting(true);
@@ -20,6 +24,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       if (response.ok) {
         const data = await response.json();
         console.log(data.token);
+        login(data.token);
+        router.push("/dashboard");
       } else {
         const errorData = await response.json();
         setErrorMessage(`Login falhou: ${errorData.error}`);
