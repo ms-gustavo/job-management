@@ -6,10 +6,15 @@ import { registerFormValidationSchema } from "@/utils/validationsSchemas";
 import { LoginFormProps } from "@/interfaces/interfaces";
 import { fetchData } from "@/utils/requestFunction";
 import { registerInitialValues } from "@/utils/initialValues";
+import { useAuth } from "@/context/AuthContext";
+import { errorToast, successToast } from "@/utils/toastsUtils";
+import { useRouter } from "next/navigation";
 
 const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { login } = useAuth();
+  const router = useRouter();
 
   const onSubmit = async (values: typeof registerInitialValues) => {
     setIsSubmitting(true);
@@ -19,16 +24,19 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       const response = await fetchData("api/register", "POST", data);
       console.log(response);
       if (response.ok) {
-        //TODO: redirecionar
         const data = await response.json();
-        console.log(data.token);
+        login(data.token);
+        successToast(`Usuário criado, aguarde redirecionamento...`);
+        router.push("/dashboard");
+        console.log(data);
       } else {
         const errorData = await response.json();
         setErrorMessage(`Registro falhou: ${errorData.error}`);
-        console.error(`Registro falhou: ${errorData.error}`);
+        errorToast(errorData.error);
       }
     } catch (error: any) {
       setErrorMessage(`Erro ao registrar: ${error.message}`);
+      errorToast(error.message);
       console.error(`Erro ao registrar: ${error.message}`);
     } finally {
       setIsSubmitting(false);
@@ -59,7 +67,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="name"
               name="name"
               placeholder="Digite seu nome"
-              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
+              className="mt-1 p-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="name"
@@ -80,7 +88,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="email"
               name="email"
               placeholder="Digite seu e-mail"
-              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
+              className="mt-1 p-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="email"
@@ -101,7 +109,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="password"
               name="password"
               placeholder="Digite sua senha"
-              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
+              className="mt-1 p-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="password"

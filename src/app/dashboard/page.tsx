@@ -21,11 +21,10 @@ const Dashboard: React.FC = () => {
         Authorization: `Bearer ${token}`,
       });
       const data = await response.json();
-      if (response.ok) {
-        setUserData(data);
-      } else {
+      if (!response.ok) {
         console.log(data);
       }
+      setUserData(data);
     };
 
     fetchUserData();

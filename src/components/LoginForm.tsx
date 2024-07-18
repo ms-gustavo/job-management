@@ -8,6 +8,7 @@ import { loginInitialValues } from "@/utils/initialValues";
 import { fetchData } from "@/utils/requestFunction";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { errorToast, successToast } from "@/utils/toastsUtils";
 
 const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,15 +26,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
         const data = await response.json();
         console.log(data.token);
         login(data.token);
+        successToast(`Logado com sucesso!`);
         router.push("/dashboard");
       } else {
         const errorData = await response.json();
         setErrorMessage(`Login falhou: ${errorData.error}`);
-        console.error("Login falhou");
+        errorToast(errorData.error);
       }
     } catch (error: any) {
       setErrorMessage(`Erro ao registrar: ${error.message}`);
-      console.error(`Erro ao registrar: ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -63,7 +64,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="email"
               name="email"
               placeholder="Digite seu e-mail"
-              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
+              className="mt-1 p-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="email"
@@ -84,7 +85,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
               id="password"
               name="password"
               placeholder="Digite sua senha"
-              className="mt-1 px-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
+              className="mt-1 p-1 block w-full border-gray-300 dark:border-gray-700 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:focus:border-blue-300 dark:focus:ring-blue-300"
             />
             <ErrorMessage
               name="password"
