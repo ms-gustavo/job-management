@@ -41,4 +41,5 @@ export interface JobFormProps {
 export interface JobListProps {
   jobs: Job[];
   onDelete: (jobId: string) => void;
+  onUpdateStatus: (jobId: string, status: string) => void;
 }

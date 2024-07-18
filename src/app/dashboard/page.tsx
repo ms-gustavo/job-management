@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
   const [showJobForm, setShowJobForm] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [newJobRegistered, setNewJobRegistered] = useState<boolean>(false);
+  const [hasJobChanged, setHasJobChanged] = useState<boolean>(false);
   const { token } = useAuth();
   const { logout } = useAuth();
   const router = useRouter();
@@ -48,19 +48,19 @@ const Dashboard: React.FC = () => {
     };
 
     fetchUserData();
-  }, [token, router, newJobRegistered]);
+  }, [token, router, hasJobChanged]);
 
   const handleJobSubmit = async (values: Job) => {
     setIsSubmitting(true);
     setErrorMessage("");
     const data = JSON.stringify(values);
     try {
-      setNewJobRegistered(false);
+      setHasJobChanged(false);
       const response = await fetchData("api/new-job", "POST", data);
       const newData = await response.json();
       if (response.ok) {
         successToast(`Aplicação criada com sucesso!`);
-        setNewJobRegistered(true);
+        setHasJobChanged(true);
       } else {
         console.error(`Erro ao salvar: ${newData.error}`);
         errorToast(`Ocorreu um erro, tente novamente mais tarde.`);
@@ -101,6 +101,29 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleUpdateStatus = async (jobId: string, updatedStatus: string) => {
+    try {
+      setHasJobChanged(false);
+      const response = await fetchData(
+        `/api/updatejobs/${jobId}`,
+        "PUT",
+        JSON.stringify({ jobId, updatedStatus }),
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (response.ok) {
+        const updatedJob = await response.json();
+        setHasJobChanged(true);
+      } else {
+        console.error("Erro ao atualizar status.");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+    }
+  };
+
   const handleLogout = () => {
     logout();
     router.push("/");
@@ -133,7 +156,11 @@ const Dashboard: React.FC = () => {
               onSubmit={(values) => handleJobSubmit(values)}
             />
           ) : (
-            <JobList jobs={userData.jobs} onDelete={handleJobDelete} />
+            <JobList
+              jobs={userData.jobs}
+              onDelete={handleJobDelete}
+              onUpdateStatus={handleUpdateStatus}
+            />
           )}
         </div>
       </div>
