@@ -31,6 +31,7 @@ export interface UserActionsProps {
 }
 
 export interface JobFormProps {
+  isSubmitting?: boolean;
   userId?: string;
   onSubmit: (values: Job) => void;
 }

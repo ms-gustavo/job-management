@@ -12,10 +12,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Dashboard: React.FC = () => {
-  const { token } = useAuth();
   const [userData, setUserData] = useState<User | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { token } = useAuth();
   const { logout } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   useEffect(() => {
     if (!token) {
@@ -45,10 +51,6 @@ const Dashboard: React.FC = () => {
     fetchUserData();
   }, [token, router]);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   const handleLogout = () => {
     logout();
     router.push("/");
@@ -59,8 +61,24 @@ const Dashboard: React.FC = () => {
     return <div>Carregando...</div>;
   }
 
-  const handleJobSubmit = (values: Job) => {
-    console.log("Dados do formulário de vaga:", values);
+  const handleJobSubmit = async (values: Job) => {
+    setIsSubmitting(true);
+    setErrorMessage("");
+    const data = JSON.stringify(values);
+    try {
+      const response = await fetchData("api/new-job", "POST", data);
+      const newData = await response.json();
+      if (response.ok) {
+        successToast(`Aplicação criada com sucesso!`);
+      } else {
+        console.error(`Erro ao salvar: ${newData.error}`);
+        errorToast(`Ocorreu um erro, tente novamente mais tarde.`);
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,6 +94,7 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="col-span-3 md:col-span-2 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg">
           <JobForm
+            isSubmitting={isSubmitting}
             userId={userData.id}
             onSubmit={(values) => handleJobSubmit(values)}
           />

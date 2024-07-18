@@ -4,11 +4,23 @@ import { statusOptions } from "@/utils/statusOptions";
 import { newJobFormValidationSchema } from "@/utils/validationsSchemas";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
-const JobForm: React.FC<JobFormProps> = ({ userId, onSubmit }) => {
+const JobForm: React.FC<JobFormProps> = ({
+  isSubmitting,
+  userId,
+  onSubmit,
+}) => {
   const initialValues = getJobInitialValues(userId!);
 
-  const handleSubmit = (values: Job) => {
-    onSubmit(values);
+  const handleSubmit = async (
+    values: Job,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    try {
+      await onSubmit(values);
+      resetForm();
+    } catch (error) {
+      console.error("Erro ao submeter o formulário:", error);
+    }
   };
 
   return (
@@ -30,7 +42,7 @@ const JobForm: React.FC<JobFormProps> = ({ userId, onSubmit }) => {
             name="title"
             type="text"
             autoComplete="off"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 dark:text-slate-950 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <ErrorMessage name="title" component="p" className="text-red-600" />
         </div>
@@ -47,7 +59,7 @@ const JobForm: React.FC<JobFormProps> = ({ userId, onSubmit }) => {
             name="company"
             type="text"
             autoComplete="off"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 dark:text-slate-950 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <ErrorMessage name="company" component="p" className="text-red-600" />
         </div>
@@ -64,7 +76,7 @@ const JobForm: React.FC<JobFormProps> = ({ userId, onSubmit }) => {
             id="status"
             name="status"
             autoComplete="off"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 dark:text-slate-950 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="">Selecione o status</option>
             {statusOptions.map((option) => (
@@ -87,7 +99,7 @@ const JobForm: React.FC<JobFormProps> = ({ userId, onSubmit }) => {
             id="appliedAt"
             name="appliedAt"
             type="date"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 dark:text-slate-950 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <ErrorMessage
             name="appliedAt"
@@ -108,16 +120,21 @@ const JobForm: React.FC<JobFormProps> = ({ userId, onSubmit }) => {
             name="site"
             type="text"
             autoComplete="off"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 dark:text-slate-950 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <ErrorMessage name="site" component="p" className="text-red-600" />
         </div>
 
         <button
           type="submit"
-          className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${
+            isSubmitting
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-blue-700 dark:hover:bg-blue-600"
+          }`}
+          disabled={isSubmitting}
         >
-          Registrar Vaga
+          {isSubmitting ? "Registrando..." : "Registrar Vaga"}
         </button>
       </Form>
     </Formik>

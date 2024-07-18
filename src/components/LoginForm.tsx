@@ -22,16 +22,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
     const data = JSON.stringify(values);
     try {
       const response = await fetchData("api/login", "POST", data);
+      const newData = await response.json();
       if (response.ok) {
-        const data = await response.json();
-        console.log(data.token);
-        login(data.token);
+        login(newData.token);
         successToast(`Logado com sucesso!`);
         router.push("/dashboard");
       } else {
-        const errorData = await response.json();
-        setErrorMessage(`Login falhou: ${errorData.error}`);
-        errorToast(errorData.error);
+        setErrorMessage(`Login falhou: ${newData.error}`);
+        errorToast(newData.error);
       }
     } catch (error: any) {
       setErrorMessage(`Erro ao registrar: ${error.message}`);

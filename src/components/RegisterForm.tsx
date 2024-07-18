@@ -58,7 +58,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-text-light dark:text-text-dark"
+              className="block text-sm font-medium text-text-light dark:text-dark"
             >
               Nome
             </label>
@@ -79,7 +79,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-text-light dark:text-text-dark"
+              className="block text-sm font-medium text-text-light dark:text-dark"
             >
               Email
             </label>
