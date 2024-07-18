@@ -1,10 +1,11 @@
 "use client";
 
+import JobForm from "@/components/NewJobForm";
 import ThemeToggle from "@/components/ThemeToggle";
 import UserActions from "@/components/UserActions";
 import WelcomeUser from "@/components/WelcomeUser";
 import { useAuth } from "@/context/AuthContext";
-import { User } from "@/interfaces/interfaces";
+import { Job, User } from "@/interfaces/interfaces";
 import { fetchData } from "@/utils/requestFunction";
 import { errorToast, successToast } from "@/utils/toastsUtils";
 import { useRouter } from "next/navigation";
@@ -58,6 +59,10 @@ const Dashboard: React.FC = () => {
     return <div>Carregando...</div>;
   }
 
+  const handleJobSubmit = (values: Job) => {
+    console.log("Dados do formulário de vaga:", values);
+  };
+
   return (
     <div className="p-4 min-h-screen bg-background-light dark:bg-background-dark">
       <ThemeToggle />
@@ -66,11 +71,14 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-3 lg:col-span-1 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg flex flex-col space-y-4">
+        <div className="col-span-3 md:col-span-1 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg flex flex-col space-y-4">
           <UserActions handleLogout={handleLogout} />
         </div>
-        <div className="col-span-3 lg:col-span-2 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg">
-          BLOCO 3
+        <div className="col-span-3 md:col-span-2 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg">
+          <JobForm
+            userId={userData.id}
+            onSubmit={(values) => handleJobSubmit(values)}
+          />
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export interface AuthContextType {
 }
 
 export interface Job {
-  id: string;
+  id?: string;
   title: string;
   company: string;
   status: string;
@@ -28,4 +28,9 @@ export interface User {
 
 export interface UserActionsProps {
   handleLogout: () => void;
+}
+
+export interface JobFormProps {
+  userId?: string;
+  onSubmit: (values: Job) => void;
 }
