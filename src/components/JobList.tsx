@@ -48,8 +48,8 @@ const JobList: React.FC<JobListProps> = ({
               onClick={() => handleSortChange("status")}
               className={`${
                 sortOption === "status"
-                  ? "bg-blue-700 hover:bg-blue-800"
-                  : "bg-blue-500 hover:bg-blue-600"
+                  ? "bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-800"
+                  : "bg-blue-400 dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-600"
               } text-white font-bold py-2 px-4 rounded transition duration-300 mr-2`}
             >
               Ordenar por Status
@@ -60,8 +60,8 @@ const JobList: React.FC<JobListProps> = ({
               onClick={() => handleSortChange("date")}
               className={`${
                 sortOption === "date"
-                  ? "bg-blue-700 hover:bg-blue-800"
-                  : "bg-blue-500 hover:bg-blue-600"
+                  ? "bg-blue-600 dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-800"
+                  : "bg-blue-400 dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-600"
               } text-white font-bold py-2 px-4 rounded transition duration-300`}
             >
               Ordenar por Data de Aplicação
@@ -117,7 +117,7 @@ const JobList: React.FC<JobListProps> = ({
             <p className="mb-2">Site: {job.site}</p>
             <button
               onClick={() => job.id && onDelete(job.id)}
-              className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+              className="mt-2 bg-red-400 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
             >
               Excluir
             </button>
