@@ -5,10 +5,21 @@
         
   <h2>Funcionalidades Principais</h2>
         <p>- <strong>Página Inicial:</strong> Interface de login e registro com design responsivo, otimizado para diferentes tamanhos de tela. Inclui um formulário de login, um link para registro e uma descrição do sistema.</p>
-        <p>- <strong>Registro de Vagas:</strong> Permite aos usuários adicionar novas vagas de emprego com informações como título, empresa, status, data de aplicação e site. O status pode ser "Análise", "Aprovado" ou "Reprovado", e a data de aplicação é preenchida automaticamente.</p>
-        <p>- <strong>Listagem de Vagas:</strong> Exibe as vagas em cards organizados responsivamente. Os usuários podem filtrar e ordenar as vagas por status ou data de aplicação.</p>
-        <p>- <strong>Edição de Status:</strong> Permite alterar o status da vaga diretamente na listagem através de um menu suspenso, com alterações salvas automaticamente.</p>
-        <p>- <strong>Exclusão de Vagas:</strong> Inclui um botão de exclusão para remover vagas do sistema.</p>
+        ![Login light mode](https://github.com/user-attachments/assets/f5c6ab8d-3d7a-4bcf-bbdf-04321d112980)
+
+        
+ <p>- <strong>Registro de Vagas:</strong> Permite aos usuários adicionar novas vagas de emprego com informações como título, empresa, status, data de aplicação e site. O status pode ser "Análise", "Aprovado" ou "Reprovado", e a data de aplicação é preenchida automaticamente.</p>
+ ![Registro de vagas](https://github.com/user-attachments/assets/1e4f30ff-5587-4e38-8c44-5f9ea23b044f)
+
+        
+
+<p>- <strong>Listagem de Vagas:</strong> Exibe as vagas em cards organizados responsivamente. Os usuários podem filtrar e ordenar as vagas por status ou data de aplicação.</p>
+![Lista de vagas](https://github.com/user-attachments/assets/236b98fe-7657-4fba-baa1-398d79bc02d0)
+
+<p>- <strong>Edição de Status:</strong> Permite alterar o status da vaga diretamente na listagem através de um menu suspenso, com alterações salvas automaticamente.</p>
+<p>- <strong>Exclusão de Vagas:</strong> Inclui um botão de exclusão para remover vagas do sistema.</p>
+![Lista de vagas light mode](https://github.com/user-attachments/assets/1774ece2-48c1-4a7a-bda7-c5e84457ed45)
+
         
   <h2>Rotas da API</h2>
         <ul>
