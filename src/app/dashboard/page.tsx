@@ -1,6 +1,7 @@
 "use client";
 
 import ThemeToggle from "@/components/ThemeToggle";
+import UserActions from "@/components/UserActions";
 import WelcomeUser from "@/components/WelcomeUser";
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/interfaces/interfaces";
@@ -66,18 +67,7 @@ const Dashboard: React.FC = () => {
 
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-3 lg:col-span-1 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg flex flex-col space-y-4">
-          <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-            Registrar Nova Vaga
-          </button>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-            Listar Todas as Vagas
-          </button>
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
-          >
-            Logout
-          </button>
+          <UserActions handleLogout={handleLogout} />
         </div>
         <div className="col-span-3 lg:col-span-2 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg">
           BLOCO 3

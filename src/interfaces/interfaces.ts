@@ -15,6 +15,7 @@ export interface Job {
   company: string;
   status: string;
   appliedAt: string;
+  site: string;
   userId: string;
 }
 
@@ -23,4 +24,8 @@ export interface User {
   name: string;
   email: string;
   jobs: Job[];
+}
+
+export interface UserActionsProps {
+  handleLogout: () => void;
 }
