@@ -42,8 +42,8 @@ const JobList: React.FC<JobListProps> = ({
   return (
     <div>
       {jobs.length > 0 && (
-        <div className="flex justify-evenly mb-4">
-          <div>
+        <div className="flex justify-center mb-4">
+          <div className="m-2">
             <button
               onClick={() => handleSortChange("status")}
               className={`${
@@ -54,6 +54,8 @@ const JobList: React.FC<JobListProps> = ({
             >
               Ordenar por Status
             </button>
+          </div>
+          <div className="m-2">
             <button
               onClick={() => handleSortChange("date")}
               className={`${
