@@ -1,13 +1,23 @@
 import { UserActionsProps } from "@/interfaces/interfaces";
 import React from "react";
 
-const UserActions: React.FC<UserActionsProps> = ({ handleLogout }) => {
+const UserActions: React.FC<UserActionsProps> = ({
+  handleLogout,
+  toggleJobForm,
+  toggleJobList,
+}) => {
   return (
     <>
-      <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+      <button
+        onClick={toggleJobForm}
+        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+      >
         Registrar Nova Vaga
       </button>
-      <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+      <button
+        onClick={toggleJobList}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+      >
         Listar Vagas
       </button>
       <button

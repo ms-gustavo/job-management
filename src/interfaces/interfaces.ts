@@ -28,10 +28,17 @@ export interface User {
 
 export interface UserActionsProps {
   handleLogout: () => void;
+  toggleJobForm: () => void;
+  toggleJobList: () => void;
 }
 
 export interface JobFormProps {
   isSubmitting?: boolean;
   userId?: string;
   onSubmit: (values: Job) => void;
+}
+
+export interface JobListProps {
+  jobs: Job[];
+  onDelete: (jobId: string) => void;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import JobList from "@/components/JobList";
 import JobForm from "@/components/NewJobForm";
 import ThemeToggle from "@/components/ThemeToggle";
 import UserActions from "@/components/UserActions";
@@ -13,15 +14,13 @@ import { useEffect, useState } from "react";
 
 const Dashboard: React.FC = () => {
   const [userData, setUserData] = useState<User | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [showJobForm, setShowJobForm] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [newJobRegistered, setNewJobRegistered] = useState<boolean>(false);
   const { token } = useAuth();
   const { logout } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   useEffect(() => {
     if (!token) {
@@ -49,27 +48,19 @@ const Dashboard: React.FC = () => {
     };
 
     fetchUserData();
-  }, [token, router]);
-
-  const handleLogout = () => {
-    logout();
-    router.push("/");
-    successToast(`Você foi deslogado com sucesso!`);
-  };
-
-  if (!userData) {
-    return <div>Carregando...</div>;
-  }
+  }, [token, router, newJobRegistered]);
 
   const handleJobSubmit = async (values: Job) => {
     setIsSubmitting(true);
     setErrorMessage("");
     const data = JSON.stringify(values);
     try {
+      setNewJobRegistered(false);
       const response = await fetchData("api/new-job", "POST", data);
       const newData = await response.json();
       if (response.ok) {
         successToast(`Aplicação criada com sucesso!`);
+        setNewJobRegistered(true);
       } else {
         console.error(`Erro ao salvar: ${newData.error}`);
         errorToast(`Ocorreu um erro, tente novamente mais tarde.`);
@@ -81,6 +72,44 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleJobDelete = async (jobId: string) => {
+    try {
+      const response = await fetchData(
+        `/api/jobs/${jobId}`,
+        "DELETE",
+        undefined,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (response.ok) {
+        setUserData((prevData) => {
+          if (!prevData) return prevData;
+          return {
+            ...prevData,
+            jobs: prevData.jobs.filter((job) => job.id !== jobId),
+          };
+        });
+        successToast(`Vaga excluída com sucesso!`);
+      } else {
+        const error = await response.json();
+        errorToast(`Erro: ${error.message}`);
+      }
+    } catch (error: any) {
+      console.error(`Erro: ${error.message}`);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+    successToast(`Você foi deslogado com sucesso!`);
+  };
+
+  if (!userData) {
+    return <div>Carregando...</div>;
+  }
   return (
     <div className="p-4 min-h-screen bg-background-light dark:bg-background-dark">
       <ThemeToggle />
@@ -90,14 +119,22 @@ const Dashboard: React.FC = () => {
 
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-3 md:col-span-1 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg flex flex-col space-y-4">
-          <UserActions handleLogout={handleLogout} />
+          <UserActions
+            handleLogout={handleLogout}
+            toggleJobForm={() => setShowJobForm(true)}
+            toggleJobList={() => setShowJobForm(false)}
+          />
         </div>
         <div className="col-span-3 md:col-span-2 bg-gray-200 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg">
-          <JobForm
-            isSubmitting={isSubmitting}
-            userId={userData.id}
-            onSubmit={(values) => handleJobSubmit(values)}
-          />
+          {showJobForm ? (
+            <JobForm
+              isSubmitting={isSubmitting}
+              userId={userData.id}
+              onSubmit={(values) => handleJobSubmit(values)}
+            />
+          ) : (
+            <JobList jobs={userData.jobs} onDelete={handleJobDelete} />
+          )}
         </div>
       </div>
     </div>
