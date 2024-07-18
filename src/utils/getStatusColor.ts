@@ -1,5 +1,4 @@
 export const getStatusColor = (status: string) => {
-  console.log("STATUS>>>>>", status); // Para depuração
   switch (status) {
     case "Aprovado":
       return "text-green-600";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { JobListProps } from "@/interfaces/interfaces";
 import { getStatusColor } from "@/utils/getStatusColor";
-import { FaPen } from "react-icons/fa"; // Importando ícone de caneta
+import { FaPen } from "react-icons/fa";
 
 const JobList: React.FC<JobListProps> = ({
   jobs,
@@ -10,6 +10,7 @@ const JobList: React.FC<JobListProps> = ({
 }) => {
   const [editingJobId, setEditingJobId] = useState<string | null>(null);
   const [updatedStatus, setUpdatedStatus] = useState<string>("");
+  const [sortOption, setSortOption] = useState<string>("");
 
   const handleEditClick = (jobId: string, currentStatus: string) => {
     setEditingJobId(jobId);
@@ -25,9 +26,49 @@ const JobList: React.FC<JobListProps> = ({
     setEditingJobId(null);
   };
 
+  const handleSortChange = (option: string) => {
+    setSortOption(option);
+  };
+
+  const sortedJobs = [...jobs].sort((a, b) => {
+    if (sortOption === "status") {
+      return a.status.localeCompare(b.status);
+    } else if (sortOption === "date") {
+      return new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime();
+    }
+    return 0;
+  });
+
   return (
     <div>
-      {jobs.length === 0 && (
+      {jobs.length > 0 && (
+        <div className="flex justify-evenly mb-4">
+          <div>
+            <button
+              onClick={() => handleSortChange("status")}
+              className={`${
+                sortOption === "status"
+                  ? "bg-blue-800 hover:bg-blue-900"
+                  : "bg-blue-600 hover:bg-blue-700"
+              } text-white font-bold py-2 px-4 rounded transition duration-300 mr-2`}
+            >
+              Ordenar por Status
+            </button>
+            <button
+              onClick={() => handleSortChange("date")}
+              className={`${
+                sortOption === "date"
+                  ? "bg-blue-800 hover:bg-blue-900"
+                  : "bg-blue-600 hover:bg-blue-700"
+              } text-white font-bold py-2 px-4 rounded transition duration-300`}
+            >
+              Ordenar por Data de Aplicação
+            </button>
+          </div>
+        </div>
+      )}
+
+      {sortedJobs.length === 0 && (
         <div className="flex items-center justify-center min-h-[150px]">
           <h2 className="text-lg font-bold text-center">
             Não há vagas cadastradas
@@ -35,7 +76,7 @@ const JobList: React.FC<JobListProps> = ({
         </div>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {jobs.map((job) => (
+        {sortedJobs.map((job) => (
           <div
             key={job.id}
             className="bg-white dark:bg-gray-800 p-4 rounded shadow flex flex-col"
@@ -48,7 +89,7 @@ const JobList: React.FC<JobListProps> = ({
                   <select
                     value={updatedStatus}
                     onChange={handleStatusChange}
-                    onBlur={() => handleStatusUpdate(job.id!, updatedStatus)} // Atualiza ao desfocar o campo
+                    onBlur={() => handleStatusUpdate(job.id!, updatedStatus)}
                     className="p-2 rounded bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
                   >
                     <option value="Análise">Análise</option>
