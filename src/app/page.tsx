@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200 dark:from-gray-800 dark:via-gray-900 dark:to-black">
       <ThemeToggle />
-      <div className="flex flex-col md:flex-row mb-8 w-full">
+      <div className="flex flex-col md:flex-row mb-8 max-w-[1440px]">
         <div
           id="welcome-component"
           className="p-4 bg-background-light dark:bg-background-dark shadow rounded-lg md:w-1/2"
