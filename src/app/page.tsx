@@ -16,11 +16,20 @@ const HomePage: React.FC = () => {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200 dark:from-gray-800 dark:via-gray-900 dark:to-black">
       <ThemeToggle />
       <div className="flex flex-col md:flex-row mb-8 w-full">
-        <div className="p-4 bg-background-light dark:bg-background-dark shadow rounded-lg md:w-1/2">
-          <h1 className="text-2xl font-bold mb-4 text-text-light dark:text-text-dark">
+        <div
+          id="welcome-component"
+          className="p-4 bg-background-light dark:bg-background-dark shadow rounded-lg md:w-1/2"
+        >
+          <h1
+            id="welcome-header-text"
+            className="text-2xl font-bold mb-4 text-text-light dark:text-text-dark"
+          >
             Bem-vindo ao Sistema de Gerenciamento de Vagas!
           </h1>
-          <p className="text-text-light dark:text-text-dark">
+          <p
+            id="welcome-body-text"
+            className="text-text-light dark:text-text-dark"
+          >
             Essa ferramenta simplifica o controle das suas oportunidades de
             emprego, permitindo que você registre novas vagas, visualize e
             gerencie suas candidaturas com facilidade. Com uma interface

@@ -9,18 +9,21 @@ const UserActions: React.FC<UserActionsProps> = ({
   return (
     <>
       <button
+        id="register-new-job"
         onClick={toggleJobForm}
         className="bg-green-400 dark:bg-green-500 hover:bg-green-500 dark:hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
       >
         Registrar Nova Vaga
       </button>
       <button
+        id="list-all-jobs"
         onClick={toggleJobList}
         className="bg-blue-400 dark:bg-blue-500 dark:hover:bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded transition duration-300"
       >
         Listar Vagas
       </button>
       <button
+        id="logout"
         onClick={handleLogout}
         className="bg-red-400 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
       >

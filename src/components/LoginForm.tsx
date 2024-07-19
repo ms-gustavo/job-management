@@ -45,13 +45,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       onSubmit={onSubmit}
     >
       {() => (
-        <Form className="w-full bg-background-light dark:bg-background-dark shadow-md rounded-lg p-8">
-          <h2 className="text-lg font-bold mb-6 text-center text-text-light dark:text-text-dark">
+        <Form
+          id="login-form"
+          className="w-full bg-background-light dark:bg-background-dark shadow-md rounded-lg p-8"
+        >
+          <h2
+            id="login-form-header"
+            className="text-lg font-bold mb-6 text-center text-text-light dark:text-text-dark"
+          >
             Login
           </h2>
 
           <div className="mb-4">
             <label
+              id="email-label"
               htmlFor="email"
               className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
@@ -73,6 +80,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
 
           <div className="mb-6">
             <label
+              id="password-label"
               htmlFor="password"
               className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
@@ -99,6 +107,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           )}
 
           <button
+            id="login-button"
             type="submit"
             className={`w-full bg-blue-600 dark:bg-blue-500 text-white font-bold py-2 rounded-md transition duration-300 ${
               isSubmitting
@@ -109,9 +118,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           >
             {isSubmitting ? "Logando..." : "Entrar"}
           </button>
-          <p className="mt-4 text-center text-text-light dark:text-text-dark">
+          <p
+            id="login-form-footer"
+            className="mt-4 text-center text-text-light dark:text-text-dark"
+          >
             Não tem cadastro?{" "}
             <button
+              id="redirect-to-register"
               type="button"
               onClick={toggleForm}
               className="text-blue-600 dark:text-blue-400 hover:underline"

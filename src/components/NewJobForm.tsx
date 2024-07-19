@@ -29,9 +29,10 @@ const JobForm: React.FC<JobFormProps> = ({
       validationSchema={newJobFormValidationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className="space-y-4">
+      <Form id="new-job-form" className="space-y-4">
         <div>
           <label
+            id="title-label"
             htmlFor="title"
             className="dark:text-slate-200 block text-sm font-medium text-gray-700"
           >
@@ -49,6 +50,7 @@ const JobForm: React.FC<JobFormProps> = ({
 
         <div>
           <label
+            id="company-label"
             htmlFor="company"
             className="dark:text-slate-200 block text-sm font-medium text-gray-700"
           >
@@ -66,6 +68,7 @@ const JobForm: React.FC<JobFormProps> = ({
 
         <div>
           <label
+            id="status-label"
             htmlFor="status"
             className="dark:text-slate-200 block text-sm font-medium text-gray-700"
           >
@@ -90,6 +93,7 @@ const JobForm: React.FC<JobFormProps> = ({
 
         <div>
           <label
+            id="application-label"
             htmlFor="appliedAt"
             className="dark:text-slate-200 block text-sm font-medium text-gray-700"
           >
@@ -110,6 +114,7 @@ const JobForm: React.FC<JobFormProps> = ({
 
         <div>
           <label
+            id="site-label"
             htmlFor="site"
             className="dark:text-slate-200 block text-sm font-medium text-gray-700"
           >
@@ -126,6 +131,7 @@ const JobForm: React.FC<JobFormProps> = ({
         </div>
 
         <button
+          id="new-job-button"
           type="submit"
           className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300 ${
             isSubmitting

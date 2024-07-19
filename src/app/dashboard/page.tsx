@@ -141,19 +141,28 @@ const Dashboard: React.FC = () => {
   return (
     <div className="p-4 min-h-screen  bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200 dark:from-gray-800 dark:via-gray-900 dark:to-black">
       <ThemeToggle />
-      <div className="bg-indigo-50 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg mb-4">
+      <div
+        id="welcome-user-container"
+        className="bg-indigo-50 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg mb-4"
+      >
         <WelcomeUser {...userData} />
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-3 md:col-span-1 bg-indigo-50 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg flex flex-col space-y-4">
+        <div
+          id="user-actions-container"
+          className="col-span-3 md:col-span-1 bg-indigo-50 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg flex flex-col space-y-4"
+        >
           <UserActions
             handleLogout={handleLogout}
             toggleJobForm={() => setShowJobForm(true)}
             toggleJobList={() => setShowJobForm(false)}
           />
         </div>
-        <div className="col-span-3 md:col-span-2 bg-indigo-50 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg">
+        <div
+          id="job-containers"
+          className="col-span-3 md:col-span-2 bg-indigo-50 dark:bg-slate-950 dark:text-slate-200 p-4 rounded-lg"
+        >
           {showJobForm ? (
             <JobForm
               isSubmitting={isSubmitting}

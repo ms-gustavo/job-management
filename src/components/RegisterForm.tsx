@@ -50,13 +50,20 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
       onSubmit={onSubmit}
     >
       {() => (
-        <Form className="w-full bg-background-light dark:bg-background-dark shadow-md rounded-lg p-8">
-          <h2 className="text-lg font-bold mb-6 text-center text-text-light dark:text-text-dark">
+        <Form
+          id="register-form"
+          className="w-full bg-background-light dark:bg-background-dark shadow-md rounded-lg p-8"
+        >
+          <h2
+            id="register-form-header"
+            className="text-lg font-bold mb-6 text-center text-text-light dark:text-text-dark"
+          >
             Registre-se
           </h2>
 
           <div className="mb-4">
             <label
+              id="name-label"
               htmlFor="name"
               className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
@@ -78,6 +85,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
 
           <div className="mb-4">
             <label
+              id="email-label"
               htmlFor="email"
               className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
@@ -99,6 +107,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
 
           <div className="mb-6">
             <label
+              id="password-label"
               htmlFor="password"
               className="block text-sm font-medium text-text-light dark:text-text-dark"
             >
@@ -125,6 +134,7 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           )}
 
           <button
+            id="register-button"
             type="submit"
             className={`w-full bg-blue-600 dark:bg-blue-500 text-white font-bold py-2 rounded-md transition duration-300 ${
               isSubmitting
@@ -135,9 +145,13 @@ const RegisterForm: React.FC<LoginFormProps> = ({ toggleForm }) => {
           >
             {isSubmitting ? "Registrando..." : "Registrar"}
           </button>
-          <p className="mt-4 text-center text-text-light dark:text-text-dark">
+          <p
+            id="register-form-footer"
+            className="mt-4 text-center text-text-light dark:text-text-dark"
+          >
             Já tem cadastro?{" "}
             <button
+              id="redirect-to-login"
               type="button"
               onClick={toggleForm}
               className="text-blue-600 dark:text-blue-400 hover:underline"

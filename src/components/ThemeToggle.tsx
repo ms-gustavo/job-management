@@ -30,10 +30,15 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <button
+      id="theme-toggle-button"
       onClick={toggleTheme}
       className="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
     >
-      {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
+      {theme === "light" ? (
+        <FaMoon id="dark-theme-button" size={20} />
+      ) : (
+        <FaSun id="light-theme-button" size={20} />
+      )}
     </button>
   );
 };

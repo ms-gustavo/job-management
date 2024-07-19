@@ -4,8 +4,10 @@ import React from "react";
 const WelcomeUser: React.FC<User> = (userData: User) => {
   return (
     <>
-      <h1 className="text-2xl font-bold">Bem vindo, {userData.name}</h1>
-      <p>
+      <h1 id="welcome-user-h1" className="text-2xl font-bold">
+        Bem vindo, {userData.name}
+      </h1>
+      <p id="welcome-user-p">
         Você tem {userData.jobs.length} vagas cadastradas. O que deseja fazer
         hoje?
       </p>

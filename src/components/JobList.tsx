@@ -42,9 +42,10 @@ const JobList: React.FC<JobListProps> = ({
   return (
     <div>
       {jobs.length > 0 && (
-        <div className="flex justify-center mb-4">
+        <div id="sort-jobs-container" className="flex justify-center mb-4">
           <div className="m-2">
             <button
+              id="order-by-status-button"
               onClick={() => handleSortChange("status")}
               className={`${
                 sortOption === "status"
@@ -57,6 +58,7 @@ const JobList: React.FC<JobListProps> = ({
           </div>
           <div className="m-2">
             <button
+              id="order-by-date-button"
               onClick={() => handleSortChange("date")}
               className={`${
                 sortOption === "date"
@@ -71,24 +73,42 @@ const JobList: React.FC<JobListProps> = ({
       )}
 
       {sortedJobs.length === 0 && (
-        <div className="flex items-center justify-center min-h-[150px]">
+        <div
+          id="no-job-registered"
+          className="flex items-center justify-center min-h-[150px]"
+        >
           <h2 className="text-lg font-bold text-center">
             Não há vagas cadastradas
           </h2>
         </div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sortedJobs.map((job) => (
+      <div
+        id="new-job-container"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      >
+        {sortedJobs.map((job, index: number) => (
           <div
+            id={`new-job-${index}`}
             key={job.id}
             className="bg-white dark:bg-gray-800 p-4 rounded shadow flex flex-col"
           >
-            <h3 className="font-bold mb-2">{job.title}</h3>
-            <p className="mb-2">Empresa: {job.company}</p>
-            <div className="flex items-center mb-2">
+            <h3 id={`new-job-title-${index}`} className="font-bold mb-2">
+              {job.title}
+            </h3>
+            <p id={`new-job-company-${index}`} className="mb-2">
+              Empresa: {job.company}
+            </p>
+            <div
+              id={`new-job-select-container-${index}`}
+              className="flex items-center mb-2"
+            >
               {editingJobId === job.id ? (
-                <div className="flex items-center">
+                <div
+                  id={`editing-job-container-${index}`}
+                  className="flex items-center"
+                >
                   <select
+                    id={`editing-job-status-${index}`}
                     value={updatedStatus}
                     onChange={handleStatusChange}
                     onBlur={() => handleStatusUpdate(job.id!, updatedStatus)}
@@ -101,21 +121,28 @@ const JobList: React.FC<JobListProps> = ({
                 </div>
               ) : (
                 <span className="flex items-center">
-                  <span className={`mb-2 ${getStatusColor(job.status)}`}>
+                  <span
+                    id={`new-job-status-${index}`}
+                    className={`mb-2 ${getStatusColor(job.status)}`}
+                  >
                     Status: {job.status}
                   </span>
                   <FaPen
+                    id={`new-job-pencil-icon-${index}`}
                     onClick={() => handleEditClick(job.id!, job.status)}
                     className="ml-2 text-blue-600 cursor-pointer hover:text-blue-700"
                   />
                 </span>
               )}
             </div>
-            <p className="mb-2">
+            <p id={`new-job-application-${index}`} className="mb-2">
               Data de Aplicação: {new Date(job.appliedAt).toLocaleDateString()}
             </p>
-            <p className="mb-2">Site: {job.site}</p>
+            <p id={`new-job-site-${index}`} className="mb-2">
+              Site: {job.site}
+            </p>
             <button
+              id={`new-job-remove-button-${index}`}
               onClick={() => job.id && onDelete(job.id)}
               className="mt-2 bg-red-400 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
             >
