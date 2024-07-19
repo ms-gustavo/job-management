@@ -6,15 +6,11 @@
   <h2>Funcionalidades Principais</h2>
         <p>- <strong>Página Inicial:</strong> Interface de login e registro com design responsivo, otimizado para diferentes tamanhos de tela. Inclui um formulário de login, um link para registro e uma descrição do sistema.</p>
 
-        
- ![Login light mode](https://github.com/user-attachments/assets/f5c6ab8d-3d7a-4bcf-bbdf-04321d112980)
+![Login light mode](https://github.com/user-attachments/assets/f5c6ab8d-3d7a-4bcf-bbdf-04321d112980)
 
-        
  <p>- <strong>Registro de Vagas:</strong> Permite aos usuários adicionar novas vagas de emprego com informações como título, empresa, status, data de aplicação e site. O status pode ser "Análise", "Aprovado" ou "Reprovado", e a data de aplicação é preenchida automaticamente.</p>
  
  ![Registro de vagas](https://github.com/user-attachments/assets/1e4f30ff-5587-4e38-8c44-5f9ea23b044f)
-
-        
 
 <p>- <strong>Listagem de Vagas:</strong> Exibe as vagas em cards organizados responsivamente. Os usuários podem filtrar e ordenar as vagas por status ou data de aplicação.</p>
 
@@ -25,7 +21,6 @@
 
 ![Lista de vagas light mode](https://github.com/user-attachments/assets/1774ece2-48c1-4a7a-bda7-c5e84457ed45)
 
-        
   <h2>Rotas da API</h2>
         <ul>
             <li><strong>Deletar Vaga:</strong> <code>DELETE /api/jobs/${id}</code> - Remove uma vaga do sistema.</li>
@@ -40,7 +35,7 @@
         <p>- <strong>Frontend:</strong> React, Next.js, Tailwind CSS e TypeScript proporcionam uma experiência de usuário dinâmica e responsiva.</p>
         <p>- <strong>Backend:</strong> Prisma para gerenciamento do banco de dados, facilitando operações de criação, atualização e exclusão de registros.</p>
         <p>- <strong>Autenticação e Gerenciamento:</strong> Context API para gerenciamento de estado e autenticação de usuários.</p>
-        <p>- <strong>Testes:</strong> Jest para garantir a qualidade e confiabilidade do código.</p>
+        <p>- <strong>Testes:</strong> Cypress para garantir a qualidade e confiabilidade do código.</p>
         
    <h2>Instalação e Configuração</h2>
         <ol>
@@ -54,24 +49,26 @@ cd job-management</code></pre>
 
 DATABASE_URL="sua_url_do_banco_de_dados"
 TOKEN_SECRET_KEY="sua_chave_secreta"</code></pre>
-            <li><strong>Configure o banco de dados:</strong></li>
-            <pre><code>npx prisma migrate dev</code></pre>
-            <li><strong>Inicie o servidor de desenvolvimento:</strong></li>
-            <pre><code>npm run dev</code></pre>
-            <p>O aplicativo estará disponível em <code>http://localhost:4000</code>.</p>
-        </ol>
-        
+
+<li><strong>Configure o banco de dados:</strong></li>
+<pre><code>npx prisma migrate dev</code></pre>
+<li><strong>Inicie o servidor de desenvolvimento:</strong></li>
+<pre><code>npm run dev</code></pre>
+<p>O aplicativo estará disponível em <code>http://localhost:4000</code>.</p>
+</ol>
+
    <h2>Scripts Disponíveis</h2>
         <ul>
             <li><code>npm run dev</code>: Inicia o servidor de desenvolvimento.</li>
             <li><code>npm run build</code>: Compila o projeto para produção.</li>
             <li><code>npm run start</code>: Inicia o servidor de produção.</li>
             <li><code>npm run lint</code>: Executa o linter para verificar o código.</li>
-            <li><code>npm run test</code>: Executa os testes.</li>
+            <li><code>npm run cypress:run</code>: Executa os testes.</li>
+            <li><code>npm run cypress:open</code>: Abre a interface gráfica do Cypress.</li>
         </ul>
         
   <h2>Aprimoramentos</h2>
-        <p>- Adicionar testes automatizados para garantir a qualidade e a confiabilidade do código.</p>
+        <p>- Adicionar testes automatizados em Jest para aumentar a qualidade e a confiabilidade do código.</p>
         
   <h2>Contribuição</h2>
         <p>Se você deseja contribuir para este projeto, por favor, faça um fork do repositório e envie um pull request com suas melhorias ou correções.</p>
