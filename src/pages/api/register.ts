@@ -32,10 +32,7 @@ const registerUser = async (req: NextApiRequest, res: NextApiResponse) => {
           id: user.id,
           email: user.email,
         },
-        JWT_SECRET,
-        {
-          expiresIn: "1h",
-        }
+        JWT_SECRET
       );
 
       res.status(201).json({ token });
