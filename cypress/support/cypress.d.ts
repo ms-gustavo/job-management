@@ -18,5 +18,6 @@ declare namespace Cypress {
     editJobStatus(): Chainable<Subject>;
     removeJob(): Chainable<Subject>;
     logout(): Chainable<Subject>;
+    filterJobByName(): Chainable<Subject>;
   }
 }

@@ -171,6 +171,26 @@ Cypress.Commands.add("registerNewJob", () => {
     .and("contain.text", "Aplicação criada com sucesso!");
 });
 
+Cypress.Commands.add("filterJobByName", () => {
+  cy.loginUser();
+  cy.get("#register-new-job").click();
+  cy.get("#new-job-form").should("exist");
+  cy.get("#title").type("Filter Job Test");
+  cy.get("#company").type("Filter Job Company Test");
+  cy.get("#status").select("Análise");
+  cy.get("#appliedAt").type("2024-07-19").should("have.value", "2024-07-19");
+  cy.get("#site").type("Filter Job Test");
+  cy.get("#new-job-button").click();
+  cy.get('div[role="status"]')
+    .should("be.visible")
+    .and("contain.text", "Aplicação criada com sucesso!");
+  cy.get("#list-all-jobs").click();
+  cy.get("#search-input").type("Filter Job Test");
+  cy.get("#new-job-0", { timeout: 1500 }).should("exist");
+  cy.get("#new-job-title-0").should("exist");
+  cy.get("#new-job-title-0").should("contain.text", "Filter Job Test");
+});
+
 Cypress.Commands.add("checkNewJob", () => {
   cy.get("#sort-jobs-container")
     .should("exist")

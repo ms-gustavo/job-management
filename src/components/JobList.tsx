@@ -82,6 +82,7 @@ const JobList: React.FC<JobListProps> = ({
       {jobs.length > 0 && (
         <>
           <input
+            id="search-input"
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
