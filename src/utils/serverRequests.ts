@@ -62,7 +62,9 @@ export const handleJobDelete = async ({
   setUserData,
   successToast,
   errorToast,
+  setIsSubmitting,
 }: HandleJobDeleteProps) => {
+  setIsSubmitting(true);
   try {
     const response = await fetchData(
       `/api/jobs/${jobId}`,
@@ -72,7 +74,6 @@ export const handleJobDelete = async ({
         Authorization: `Bearer ${token}`,
       }
     );
-
     if (response.ok) {
       setUserData((prevData) => {
         if (!prevData) return prevData;
@@ -88,6 +89,8 @@ export const handleJobDelete = async ({
     }
   } catch (error: any) {
     console.error(`Erro: ${error.message}`);
+  } finally {
+    setIsSubmitting(false);
   }
 };
 

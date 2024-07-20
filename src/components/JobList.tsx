@@ -6,6 +6,7 @@ const JobList: React.FC<JobListProps> = ({
   jobs,
   onDelete,
   onUpdateStatus,
+  isSubmitting,
 }) => {
   const [editingJobId, setEditingJobId] = useState<string | null>(null);
   const [updatedStatus, setUpdatedStatus] = useState<string>("");
@@ -65,6 +66,10 @@ const JobList: React.FC<JobListProps> = ({
         return "text-black dark:text-white";
     }
   };
+
+  useEffect(() => {
+    console.log(isSubmitting);
+  }, [isSubmitting]);
 
   return (
     <div>
@@ -182,7 +187,12 @@ const JobList: React.FC<JobListProps> = ({
                 <button
                   id={`new-job-remove-button-${index}`}
                   onClick={() => job.id && onDelete(job.id)}
-                  className="mt-2 bg-red-400 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+                  className={`mt-2 ${
+                    isSubmitting
+                      ? "bg-gray-400 dark:bg-gray-500 cursor-not-allowed"
+                      : "bg-red-400 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-600"
+                  } text-white font-bold py-2 px-4 rounded transition duration-300`}
+                  disabled={isSubmitting}
                 >
                   Excluir
                 </button>

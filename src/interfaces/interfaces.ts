@@ -42,6 +42,7 @@ export interface JobListProps {
   jobs: Job[];
   onDelete: (jobId: string) => void;
   onUpdateStatus: (jobId: string, status: string) => void;
+  isSubmitting: boolean;
 }
 
 export interface ToastsProps {
@@ -69,6 +70,7 @@ export interface HandleJobDeleteProps {
   setUserData: React.Dispatch<React.SetStateAction<User | null>>;
   errorToast: (message: string) => void;
   successToast: (message: string) => void;
+  setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface HandleUpdateStatusProps {

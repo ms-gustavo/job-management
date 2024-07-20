@@ -96,7 +96,8 @@ const Dashboard: React.FC = () => {
                   token!,
                   setUserData,
                   successToast,
-                  errorToast
+                  errorToast,
+                  setIsSubmitting
                 )
               }
               onUpdateStatus={(jobId, updatedStatus) =>
@@ -108,6 +109,7 @@ const Dashboard: React.FC = () => {
                   errorToast
                 )
               }
+              isSubmitting={isSubmitting}
             />
           )}
         </div>

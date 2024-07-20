@@ -6,7 +6,8 @@ export const handleJobDeleteAdapter = (
   token: string,
   setUserData: React.Dispatch<React.SetStateAction<User | null>>,
   successToast: (message: string) => void,
-  errorToast: (message: string) => void
+  errorToast: (message: string) => void,
+  setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   handleJobDelete({
     jobId,
@@ -14,6 +15,7 @@ export const handleJobDeleteAdapter = (
     setUserData,
     successToast,
     errorToast,
+    setIsSubmitting,
   });
 };
 
