@@ -43,3 +43,38 @@ export interface JobListProps {
   onDelete: (jobId: string) => void;
   onUpdateStatus: (jobId: string, status: string) => void;
 }
+
+export interface ToastsProps {
+  errorToast: (message: string) => void;
+  successToast: (message: string) => void;
+}
+
+export interface FetchUserDataProps {
+  token: string;
+  setUserData: React.Dispatch<React.SetStateAction<User | null>>;
+  errorToast: (message: string) => void;
+}
+
+export interface HandleJobSubmitProps {
+  values: Job;
+  setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
+  setHasJobChanged: React.Dispatch<React.SetStateAction<boolean>>;
+  successToast: (message: string) => void;
+  errorToast: (message: string) => void;
+}
+
+export interface HandleJobDeleteProps {
+  jobId: string;
+  token: string;
+  setUserData: React.Dispatch<React.SetStateAction<User | null>>;
+  errorToast: (message: string) => void;
+  successToast: (message: string) => void;
+}
+
+export interface HandleUpdateStatusProps {
+  jobId: string;
+  updatedStatus: string;
+  token: string;
+  setHasJobChanged: React.Dispatch<React.SetStateAction<boolean>>;
+  errorToast: (message: string) => void;
+}
